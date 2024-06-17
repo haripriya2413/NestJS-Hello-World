@@ -45,5 +45,5 @@ jobs:
             git pull origin main  # Pull latest changes
             npm install --production  # Install production dependencies
             npm run build  # Build again (if necessary)
-            pm2 restart ecosystem.config.js --env production  # Restart PM2 (if using)
+            pm2 restart ecosystem.config.js --env production  #  Restart PM2 (if using)
 
