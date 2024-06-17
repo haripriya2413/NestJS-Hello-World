@@ -47,9 +47,9 @@ jobs:
           script: |
             cd NestJS-Hello-World
             git pull origin main  # Pull latest changes
-            npm install  # Install production dependencies
+            npm install --production# Install production dependencies
             npm run build  # Build again (if necessary)
-            npm2 restart ecosystem.config.js
-            # pm2 restart ecosystem.config.js --env production  #  Restart PM2 (if using)
+           
+            pm2 restart ecosystem.config.js --env production  #  Restart PM2 (if using)
 
             
