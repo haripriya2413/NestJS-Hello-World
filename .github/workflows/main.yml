@@ -45,7 +45,7 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /path/to/your/nestjs/app
+            cd NestJS-Hello-World
             git pull origin main  # Pull latest changes
             npm install --production  # Install production dependencies
             npm run build  # Build again (if necessary)
