@@ -55,6 +55,6 @@ jobs:
            
             #npm run start
            
-            pm2 restart src/main.ts   #ecosystem.config.js # --env production  #  Restart PM2 (if using)
+            pm2 restart NestJS-Hello-World/src/main.ts   #ecosystem.config.js # --env production  #  Restart PM2 (if using)
 
             
