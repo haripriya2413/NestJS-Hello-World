@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.x'  # Change this to your Node.js version 
+          node-version: '20.x'  # Change this to your Node.js version 
 
       - name: Install dependencies
         run: npm install
@@ -46,7 +46,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd NestJS-Hello-World
-            git pull origin main  # Pull latest changes
+            git pull  # Pull latest changes
             npm install --production# Install production dependencies
             npm run build  # Build again (if necessary)
             sudo npm install -g pm2
