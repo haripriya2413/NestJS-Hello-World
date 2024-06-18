@@ -39,6 +39,6 @@ jobs:
           npm install
           npm run build
           npx kill-port 3000
-          npm start
-          #pm2 restart NestJS-Hello-World || pm2 start dist/main.js --name "NestJS-Hello-World"
+          #npm start
+          pm2 restart NestJS-Hello-World || pm2 start dist/main.js --name "NestJS-Hello-World"
           EOF
