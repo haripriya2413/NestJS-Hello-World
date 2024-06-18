@@ -49,7 +49,7 @@ jobs:
           script: |
             #cd NestJS-Hello-World
             cd /home/ubuntu/NestJS-Hello-World
-            git pull  # Pull latest changes
+            git pull origin main # Pull latest changes
             npm install  
             npm install -g pm2
             npm run build  # Build again (if necessary)
