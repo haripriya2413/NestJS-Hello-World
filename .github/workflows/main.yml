@@ -52,10 +52,10 @@ jobs:
             #git fetch origin
             #git reset --hard origin/main
             #git fetch
-            git stash
-            git pull –rebase
+            #git stash
+            #git pull –rebase
             #git rebase --autostash FETCH_HEAD
-            #git pull origin main
+            git pull origin main
             #git pull -u origin main # Pull latest changes
             #git push -u origin main 
             npm install  
