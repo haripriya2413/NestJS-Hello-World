@@ -27,7 +27,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    #if: github.ref == 'refs/heads/main'  # Change this to your main branch name
+    if: github.ref == 'refs/heads/main'  # Change this to your main branch name
 
     steps:
       - name: Install SSH key
@@ -55,7 +55,7 @@ jobs:
            
             #npm run start
            
-            pm2 restart dist/main.js --env production  #  Restart PM2 (if using)
+            pm2 restart dist/main.js #--env production  #  Restart PM2 (if using)
               #pm2 reload NestJS-Hello-World --update-env
 
             
