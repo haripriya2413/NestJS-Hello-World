@@ -55,6 +55,7 @@ jobs:
            
             #npm run start
            
-            pm2 restart ecosystem.config.js # --env production  #  Restart PM2 (if using)
+            #pm2 restart ecosystem.config.js # --env production  #  Restart PM2 (if using)
+              pm2 reload NestJS-Hello-World --update-env
 
             
