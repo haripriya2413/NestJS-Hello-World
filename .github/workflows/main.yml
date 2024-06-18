@@ -52,8 +52,8 @@ jobs:
             #git fetch origin
             #git reset --hard origin/main
            
-        
-            git pull -u origin main # Pull latest changes
+            git pull --rebase origin main
+            #git pull -u origin main # Pull latest changes
             #git push -u origin main 
             npm install  
             npm install -g pm2
