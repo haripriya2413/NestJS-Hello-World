@@ -30,6 +30,10 @@ jobs:
       - name: Extract files on EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.91.215.1 'cd /home/ubuntu/NestJS-Hello-World && tar -xzf code.tar.gz && rm code.tar.gz'
+     
+      - name: Stop existing PM2 process
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@52.91.215.1 'pm2 stop NestJS-Hello-World || true && pm2 delete NestJS-Hello-World|| true'
 
       - name: Install dependencies and restart application
         run: |
@@ -40,5 +44,5 @@ jobs:
           npm run build
           npx kill-port 3000
           #npm start
-          pm2 restart NestJS-Hello-World || pm2 start dist/main.js --name "NestJS-Hello-World"
+          pm2 start NestJS-Hello-World || pm2 start dist/main.js --name "NestJS-Hello-World"
           EOF
