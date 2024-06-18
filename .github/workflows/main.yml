@@ -1,61 +1,37 @@
-name: CI/CD for NestJSApp
+name: Deploy to EC2
 
 on:
   push:
     branches:
-      - main  #  Change this to your main branch name
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
         with:
-          node-version: '20.x'  # Change this to your Node.js version 
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build NestJS application
-        run: npm run build
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main'  # Change this to your main branch name
-
-    steps:
-      - name: Install SSH key
-        id: install_ssh
+      - name: Create directory on EC2
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key.pem
-          chmod 600 private_key.pem
-          eval $(ssh-agent -s)
-          ssh-add private_key.pem
+          ssh -o StrictHostKeyChecking=no ubuntu@52.91.215.1 'mkdir -p /home/ubuntu/NestJS-Hello-World'
 
-      
+      - name: Copy files to EC2
+        run: |
+          scp -o StrictHostKeyChecking=no -r . ubuntu@52.91.215.1:/home/ubuntu/NestJS-Hello-World
 
-      - name: SSH into EC2 instance and deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            #cd NestJS-Hello-World
-            cd /home/ubuntu/NestJS-Hello-World
-            git pull origin main
-            npm install  
-            npm install -g pm2
-            npm run build  # Build again (if necessary)
-            kill -9 
-            npm run stop
-            npm run start
-            #pm2 restart NestJS-Hello-World|| pm2 start dist/main.js --name "NestJS-Hello-World"
-
-            
+      - name: Install dependencies and restart application
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@52.91.215.1 << 'EOF'
+          cd /home/ubuntu/NestJS-Hello-World
+          npm install
+          npm run build
+          npm run start
+          #pm2 restart nestjsapp || pm2 start dist/main.js --name "nestjsapp"
+          EOF
