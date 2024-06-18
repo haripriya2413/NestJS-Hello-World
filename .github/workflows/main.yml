@@ -49,8 +49,9 @@ jobs:
           script: |
             #cd NestJS-Hello-World
             cd /home/ubuntu/NestJS-Hello-World
-            git fetch origin
-            git reset --hard origin/main
+            #git fetch origin
+            #git reset --hard origin/main
+            git push -u origin main 
         
             git pull origin main # Pull latest changes
             npm install  
