@@ -35,6 +35,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.91.215.1 << 'EOF'
           cd /home/ubuntu/NestJS-Hello-World
+          rm -rf node-modules package-lock.json
           npm install
           npm run build
           #npm start
