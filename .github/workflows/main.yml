@@ -53,7 +53,7 @@ jobs:
             npm install  
             #npm install -g pm2
             npm run build
-            npm run start# Build again (if necessary)
+            npm run start 
            
           
             
