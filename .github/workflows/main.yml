@@ -18,16 +18,23 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Debug SSH Connection
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@52.91.215.1 'echo "SSH connection successful"'
+
       - name: Copy files to EC2
         run: |
-          scp -o StrictHostKeyChecking=no -r . ubuntu@52.91.215.1/home/ubuntu/NestJS-Hello-World/NestJS-Hello-World
+          scp -o StrictHostKeyChecking=no -r . ubuntu@52.91.215.1:/home/ubuntu/NestJS-Hello-World
+
+      - name: Debug Directory Structure
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@52.91.215.1 'ls -la /home/ubuntu/NestJS-Hello-World'
 
       - name: Install dependencies and restart application
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@52.91.215.1 << 'EOF'
-          cd /home/ubuntu/nestjsapp
+          cd /home/ubuntu/NestJS-Hello-World
           npm install
           npm run build
-          npm run start
-          #pm2 restart nestjsapp || pm2 start dist/main.js --name "nestjsapp"
+          pm2 restart NestJS-Hello-World || pm2 start dist/main.js --name "NestJS-Hello-World"
           EOF
