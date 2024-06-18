@@ -51,8 +51,9 @@ jobs:
             cd /home/ubuntu/NestJS-Hello-World
             #git fetch origin
             #git reset --hard origin/main
-           
-            git pull --rebase origin main
+            git fetch
+            git rebase --autostash FETCH_HEAD
+            #git pull --rebase origin main
             #git pull -u origin main # Pull latest changes
             #git push -u origin main 
             npm install  
