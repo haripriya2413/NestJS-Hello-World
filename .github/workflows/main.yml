@@ -37,6 +37,6 @@ jobs:
           cd /home/ubuntu/NestJS-Hello-World
           npm install
           npm run build
-          npm start
-          #pm2 restart nestjsapp || pm2 start dist/main.js --name "nestjsapp"
+          #npm start
+          pm2 restart NestJS-Hello-World || pm2 start dist/main.js --name "NestJS-Hello-World"
           EOF
