@@ -47,7 +47,8 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd NestJS-Hello-World
+            #cd NestJS-Hello-World
+            cd /home/ubuntu/NestJS-Hello-World
             git pull  # Pull latest changes
             npm install  
             npm install -g pm2
