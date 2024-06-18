@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 let AppService = class AppService {
     getHello() {
-        return 'Hello World! Welcome to PearlThoughts!!!';
+        return 'Hello World!!!!';
     }
     getPing() {
         return 'Pong!';
