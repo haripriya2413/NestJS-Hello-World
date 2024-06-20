@@ -12,16 +12,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       
-      - name: Install Node.js and npm
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
+   
 
       - name: Create directory on EC2
         run: |
@@ -44,7 +45,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@54.224.232.64 << 'EOF'
           cd /home/ubuntu/NestJS-Hello-World
-          rm -rf node-modules package-lock.json
+          #rm -rf node-modules package-lock.json
           #sudo npm install -g pm2
 
           npm install
