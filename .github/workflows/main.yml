@@ -16,27 +16,30 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+        
 
       - name: Create directory on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.210.177.39 'mkdir -p /home/ubuntu/NestJS-Hello-World'
+          ssh -o StrictHostKeyChecking=no username@host 'mkdir -p /home/ubuntu/NestJS-Hello-World'
 
       - name: Copy files to EC2
         run: |
           tar -czf code.tar.gz *
-          scp -o StrictHostKeyChecking=no code.tar.gz ubuntu@54.210.177.39:/home/ubuntu/NestJS-Hello-World
+          scp -o StrictHostKeyChecking=no code.tar.gz username@host:/home/ubuntu/NestJS-Hello-World
 
       - name: Extract files on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.210.177.39 'cd /home/ubuntu/NestJS-Hello-World && tar -xzf code.tar.gz && rm code.tar.gz'
+          ssh -o StrictHostKeyChecking=no username@host 'cd /home/ubuntu/NestJS-Hello-World && tar -xzf code.tar.gz && rm code.tar.gz'
      
       - name: Stop existing PM2 process
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.210.177.39 'pm2 stop NestJS-Hello-World || true && pm2 delete NestJS-Hello-World|| true'
+          ssh -o StrictHostKeyChecking=no username@host 'pm2 stop NestJS-Hello-World || true && pm2 delete NestJS-Hello-World|| true'
 
       - name: Install dependencies and restart application
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.210.177.39 << 'EOF'
+          ssh -o StrictHostKeyChecking=no username@host << 'EOF'
           cd /home/ubuntu/NestJS-Hello-World
           rm -rf node-modules package-lock.json
           npm install
