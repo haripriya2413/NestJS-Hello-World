@@ -27,19 +27,19 @@ jobs:
       - name: Copy files to EC2
         run: |
           tar -czf code.tar.gz *
-          scp -o StrictHostKeyChecking=no code.tar.gz username@host:/home/ubuntu/NestJS-Hello-World
+          scp -o StrictHostKeyChecking=no code.tar.gz ubuntu@{{ secrets.EC2_USER }}:/home/ubuntu/NestJS-Hello-World
 
       - name: Extract files on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no username@host 'cd /home/ubuntu/NestJS-Hello-World && tar -xzf code.tar.gz && rm code.tar.gz'
+          ssh -o StrictHostKeyChecking=no ubuntu@{{ secrets.EC2_HOST }} 'cd /home/ubuntu/NestJS-Hello-World && tar -xzf code.tar.gz && rm code.tar.gz'
      
       - name: Stop existing PM2 process
         run: |
-          ssh -o StrictHostKeyChecking=no username@host 'pm2 stop NestJS-Hello-World || true && pm2 delete NestJS-Hello-World|| true'
+          ssh -o StrictHostKeyChecking=no ubuntu@{{ secrets.EC2_HOST }} 'pm2 stop NestJS-Hello-World || true && pm2 delete NestJS-Hello-World|| true'
 
       - name: Install dependencies and restart application
         run: |
-          ssh -o StrictHostKeyChecking=no username@host << 'EOF'
+          ssh -o StrictHostKeyChecking=no ubuntu@{{ secrets.EC2_HOST }} << 'EOF'
           cd /home/ubuntu/NestJS-Hello-World
           rm -rf node-modules package-lock.json
           npm install
