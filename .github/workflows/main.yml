@@ -22,12 +22,12 @@ jobs:
 
       - name: Create directory on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no username@host 'mkdir -p /home/ubuntu/NestJS-Hello-World'
+          ssh -o StrictHostKeyChecking=no ubuntu@{{ secrets.EC2_HOST }} 'mkdir -p /home/ubuntu/NestJS-Hello-World'
 
       - name: Copy files to EC2
         run: |
           tar -czf code.tar.gz *
-          scp -o StrictHostKeyChecking=no code.tar.gz ubuntu@{{ secrets.EC2_USER }}:/home/ubuntu/NestJS-Hello-World
+          scp -o StrictHostKeyChecking=no code.tar.gz ubuntu@{{ secrets.EC2_HOST }} :/home/ubuntu/NestJS-Hello-World
 
       - name: Extract files on EC2
         run: |
