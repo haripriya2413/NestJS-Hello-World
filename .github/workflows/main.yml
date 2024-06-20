@@ -17,6 +17,11 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
 
       - name: Create directory on EC2
         run: |
@@ -42,7 +47,7 @@ jobs:
           rm -rf node-modules package-lock.json
           sudo npm install -g pm2
 
-          sudo npm install
+          npm install
           npm run build
           #npx kill-port 3000
           #npm start
