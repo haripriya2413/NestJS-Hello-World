@@ -22,7 +22,7 @@ jobs:
 
       - name: Create directory on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.224.232.64'mkdir -p /home/ubuntu/NestJS-Hello-World'
+          ssh -o StrictHostKeyChecking=no ubuntu@54.224.232.64 mkdir -p /home/ubuntu/NestJS-Hello-World'
 
       - name: Copy files to EC2
         run: |
@@ -31,11 +31,11 @@ jobs:
 
       - name: Extract files on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.224.232.64 'cd /home/ubuntu/NestJS-Hello-World && tar -xzf code.tar.gz && rm code.tar.gz'
+          ssh -o StrictHostKeyChecking=no ubuntu@54.224.232.64 cd /home/ubuntu/NestJS-Hello-World && tar -xzf code.tar.gz && rm code.tar.gz'
      
       - name: Stop existing PM2 process
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@54.224.232.64'pm2 stop NestJS-Hello-World || true && pm2 delete NestJS-Hello-World|| true'
+          ssh -o StrictHostKeyChecking=no ubuntu@54.224.232.64 pm2 stop NestJS-Hello-World || true && pm2 delete NestJS-Hello-World|| true'
 
       - name: Install dependencies and restart application
         run: |
