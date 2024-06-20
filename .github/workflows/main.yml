@@ -40,9 +40,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no ubuntu@54.224.232.64 << 'EOF'
           cd /home/ubuntu/NestJS-Hello-World
           rm -rf node-modules package-lock.json
-          npm install -g pm2
+          sudo npm install -g pm2
 
-          npm install
+          sudo npm install
           npm run build
           #npx kill-port 3000
           #npm start
