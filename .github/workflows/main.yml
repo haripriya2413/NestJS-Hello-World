@@ -27,7 +27,7 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-            #git clone https://github.com/haripriya2413/NestJS-Hello-World.git
+      
             cd /home/ubuntu/NestJS-Hello-World
      
             
