@@ -30,13 +30,13 @@ jobs:
             cd /home/ubuntu/NestJS-Hello-World
             
             # Update to the correct path on your EC2 instance
-            if [ ! -d .git ]; then
-              git init
-              git remote add origin https://github.com/priya2413/NestJS-Hello-World.git
-            fi
+            #if [ ! -d .git ]; then
+            #  git init
+             # git remote add origin https://github.com/priya2413/NestJS-Hello-World.git
+            #fi
             git fetch origin
             git reset --hard origin/main  # Use the correct branch name
-            sudo npm install -g pm2
+            #sudo npm install -g pm2
 
             npm install
             npm run build
