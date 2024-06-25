@@ -28,16 +28,14 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
 
-            PROJECT_DIR="/home/ubuntu/NestJS-Hello-World"
-
-            # Remove the existing directory if it exists to avoid conflicts
-            if [ -d "$PROJECT_DIR" ]; then
-              rm -rf "$PROJECT_DIR"
+            cd /home/ubuntu/NestJS-Hello-World
+            # Update to the correct path on your EC2 instance
+            if [ ! -d .git ]; then
+              git init
+              git remote add origin https://github.com/priya2413/NestJS-Hello-World.git
             fi
-            git clone https://github.com/priya2413/NestJS-Hello-World.git
-            cd PROJECT_DIR
-            # Pull the latest changes from the master branch
-            git pull origin main
+            git fetch origin
+            git reset --hard origin/master  # Use the correct branch nam
             npm install
             npm run build
             pm2 restart all || pm2 start --name "NestJS-Hello-World"
