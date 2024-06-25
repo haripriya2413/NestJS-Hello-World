@@ -29,10 +29,10 @@ jobs:
         script: |
       
             cd /home/ubuntu/NestJS-Hello-World
-            git pull origin main
+            #git pull origin main
             npm install
             npm run build
-            pm2 restart all || pm2 start --name "NestJS-Hello-World"
+            pm2 restart --name "NestJS-Hello-World" || pm2 start --name "NestJS-Hello-World"
             
             # Update to the correct path on your EC2 instance
             #if [ ! -d .git ]; then
